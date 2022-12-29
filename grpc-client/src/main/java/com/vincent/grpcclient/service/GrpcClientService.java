@@ -10,22 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class GrpcClientService {
 
-    @GrpcClient("server-stream-server-side")
-    private MyServiceBlockingStub myServiceBlockingStub;
+  @GrpcClient("server-stream-server-side")
+  private MyServiceBlockingStub myServiceBlockingStub;
 
-    public String receiveGreeting(String name){
+  public String receiveGreeting(final String name) {
 
-        HelloRequest request = HelloRequest.newBuilder()
-                .setName(name)
-                .build();
-        HelloReply reply;
-        try
-        {
-            reply = myServiceBlockingStub.sayHello(request);
-            System.out.println(reply.getMessage());
-        }catch(StatusRuntimeException e){
-            System.out.println("RPC failed:"  + e.getMessage());
-        }
-        return myServiceBlockingStub.sayHello(request).getMessage();
+    HelloRequest request = HelloRequest.newBuilder()
+        .setName(name)
+        .build();
+    try {
+      HelloReply reply = myServiceBlockingStub.sayHello(request);
+      System.out.println(reply.getMessage());
+      return reply.getMessage();
+    } catch (StatusRuntimeException e) {
+      System.out.println("RPC failed:" + e.getMessage());
+      return "FAILED with " + e.getStatus().getCode().name();
     }
+  }
 }
