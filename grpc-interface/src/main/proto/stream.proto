@@ -7,6 +7,7 @@ option java_package = "com.vincent.grpc";
 option java_outer_classname = "TestStreamProto";
 
 service OrderQuery{
+  // server 流方式
   rpc ListOrders(Buyer) returns (stream Order){}
 }
 

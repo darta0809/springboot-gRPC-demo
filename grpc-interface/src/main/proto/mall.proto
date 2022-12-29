@@ -7,6 +7,7 @@ option java_package = "com.vincent.grpc";
 option java_outer_classname = "clientSideProto";
 
 service CartService {
+  // Client 流方式
   rpc AddToCart (stream ProductOrder) returns (AddCartReply) {}
 }
 
