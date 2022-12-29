@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.vincent.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.vincent.grpc";
+option java_outer_classname = "clientSideProto";
+
+service CartService {
+  rpc AddToCart (stream ProductOrder) returns (AddCartReply) {}
+}
+
+message ProductOrder {
+  int32 productId = 1;
+  int32 number = 2;
+}
+
+message AddCartReply {
+  int32 code = 1;
+  string message = 2;
+}

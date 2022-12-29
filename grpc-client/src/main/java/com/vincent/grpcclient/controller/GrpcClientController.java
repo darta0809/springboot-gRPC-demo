@@ -1,6 +1,7 @@
 package com.vincent.grpcclient.controller;
 
 import com.vincent.grpcclient.model.DispOrder;
+import com.vincent.grpcclient.service.GrpcClientCartService;
 import com.vincent.grpcclient.service.GrpcClientOrderService;
 import com.vincent.grpcclient.service.GrpcClientService;
 import java.util.List;
@@ -15,6 +16,7 @@ public class GrpcClientController {
 
   private final GrpcClientService grpcClientService;
   private final GrpcClientOrderService grpcClientOrderService;
+  private final GrpcClientCartService grpcClientCartService;
 
   @GetMapping("hello")
   public String printMessage(@RequestParam(defaultValue = "hello") String name) {
@@ -24,5 +26,10 @@ public class GrpcClientController {
   @GetMapping("order")
   public List<DispOrder> printOrder(@RequestParam(defaultValue = "order") String name) {
     return grpcClientOrderService.listOrders(name);
+  }
+
+  @GetMapping("cart")
+  public String printCart(@RequestParam(defaultValue = "1") int count) {
+    return grpcClientCartService.addToCart(count);
   }
 }
