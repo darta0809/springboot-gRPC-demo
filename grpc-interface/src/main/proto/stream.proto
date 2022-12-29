@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.vincent.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.vincent.grpc";
+option java_outer_classname = "TestStreamProto";
+
+service OrderQuery{
+  rpc ListOrders(Buyer) returns (stream Order){}
+}
+
+message Buyer{
+  int32 buyerId = 1;
+}
+
+message Order{
+  int32 orderId = 1;
+  int32 productId = 2;
+  int64 orderTime = 3;
+  string buyerRemark = 4;
+}
