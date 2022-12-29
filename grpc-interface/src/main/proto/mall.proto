@@ -20,3 +20,13 @@ message AddCartReply {
   int32 code = 1;
   string message = 2;
 }
+
+service StockService {
+  // 雙向流方式
+  rpc BatchDeduct (stream ProductOrder) returns (stream DeductReply) {}
+}
+
+message DeductReply {
+  int32 code = 1;
+  string message = 2;
+}
